@@ -1,0 +1,11 @@
+syntax = "proto3";
+//包名
+option java_package = "com.twist.netty.protobuf";
+option java_outer_classname = "YujiaMsg";
+
+message Yujia {
+    string header = 1;
+    int32 len = 2;
+    string bsId= 3;
+    string ope = 4;
+}
