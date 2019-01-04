@@ -16,12 +16,12 @@ public class HttpHelloWorldServerInitializer extends ChannelInitializer<SocketCh
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        // 也可以使用HttpRequestDecoder & HttpResponseEncoder
+        // 也可以使用HttpServerCodec = HttpRequestDecoder & HttpResponseEncoder
         pipeline.addLast(new HttpServerCodec());
 
-        //处理post
-        pipeline.addLast(new HttpObjectAggregator(1024 * 1024));
-        pipeline.addLast(new HttpServerExpectContinueHandler());
+        //处理post 因为post 请求 参数信息是放在message body 中（HttpMessage）
+        pipeline.addLast(new HttpObjectAggregator(1024 * 1024)); // 聚合HttpMessage + HttpContent 成FullHttpRequest或FullHttpResPonse
+        pipeline.addLast(new HttpServerExpectContinueHandler()); //post 大数据
         pipeline.addLast(new HttpHelloWorldServerHandler());
     }
 }

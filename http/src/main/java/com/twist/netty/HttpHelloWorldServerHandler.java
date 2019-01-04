@@ -77,7 +77,7 @@ public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<Htt
                 }
                 user.setMethod("get");
             } else if (method.equals(HttpMethod.POST)) {
-                //将msg 转FullHttpRequest 获取数据
+                //将msg 转FullHttpRequest 获取数据 FullHttpRequest=HttpRequest + FullHttpMessage
                 FullHttpRequest full = (FullHttpRequest) msg;
                 dealWithContentType(full);
                 user.setMethod("post");
