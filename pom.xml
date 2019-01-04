@@ -6,6 +6,7 @@
     <modules>
         <module>helloworld</module>
         <module>http</module>
+        <module>protobuf</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
