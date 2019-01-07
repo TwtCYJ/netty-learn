@@ -7,7 +7,7 @@
         <module>helloworld</module>
         <module>http</module>
         <module>protobuf</module>
-        <module>yujia</module>
+        <module>netty-yujia</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
