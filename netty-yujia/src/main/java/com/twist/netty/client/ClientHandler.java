@@ -40,7 +40,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        log.info("连接客户端：" + new Date());
+        log.info("连接服务端：" + new Date());
         ctx.fireChannelActive();
     }
 
@@ -72,7 +72,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             IdleStateEvent event = (IdleStateEvent) evt;
             //这里判断写通道是不是空闲的 如果是就发送心跳
             if (IdleState.WRITER_IDLE.equals(event.state())) {
-//                UserMsg.User.Builder state = UserMsg.User.newBuilder().setState(2);
                 ctx.channel().writeAndFlush("FA FB 2F 00 00 00 00 00 01 20 05 01 00 11 01 25 3F 00 00 38 00 00 00 02 12 21 00 00 00 00 00 03 00 00 00 00 00 00 00 02 01 07 50 02 50 08 25 00 00 00 00 00 02 07 10 02 63 19 26 00 00 00 00 00 00 72 4B");
                 count.getAndIncrement();
             }
