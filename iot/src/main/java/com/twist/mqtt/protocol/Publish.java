@@ -46,6 +46,15 @@ public class Publish {
 
     private RetainMessageStoreService retainMessageStoreService;
 
+    public Publish(KafkaService kafkaService, SubscribeStoreService subscribeStoreService, SessionStoreService sessionStoreService, MessageIdService messageIdService, DupPublishMessageStoreService dupPublishMessageStoreService, RetainMessageStoreService retainMessageStoreService) {
+        this.kafkaService = kafkaService;
+        this.subscribeStoreService = subscribeStoreService;
+        this.sessionStoreService = sessionStoreService;
+        this.messageIdService = messageIdService;
+        this.dupPublishMessageStoreService = dupPublishMessageStoreService;
+        this.retainMessageStoreService = retainMessageStoreService;
+    }
+
     public void processPublish(Channel channel, MqttPublishMessage msg) {
         String clientId = (String) channel.attr(AttributeKey.valueOf("clientId")).get();
         //QoS=0

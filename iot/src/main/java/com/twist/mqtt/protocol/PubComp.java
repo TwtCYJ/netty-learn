@@ -16,6 +16,10 @@ public class PubComp {
 
     private DupPubRelMessageStoreService dupPubRelMessageStoreService;
 
+    public PubComp(DupPubRelMessageStoreService dupPubRelMessageStoreService) {
+        this.dupPubRelMessageStoreService = dupPubRelMessageStoreService;
+    }
+
     public void processPubComp(Channel channel, MqttMessageIdVariableHeader variableHeader) {
         int messageId = variableHeader.messageId();
         log.info("PUBCOMP - clientId: {}, messageId: {}", (String) channel.attr(AttributeKey.valueOf("clientId")).get(), messageId);

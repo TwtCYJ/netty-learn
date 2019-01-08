@@ -24,6 +24,10 @@ public class UnSubscribe {
 
     private SubscribeStoreService subscribeStoreService;
 
+    public UnSubscribe(SubscribeStoreService subscribeStoreService) {
+        this.subscribeStoreService = subscribeStoreService;
+    }
+
     public void processUnSubscribe(Channel channel, MqttUnsubscribeMessage msg) {
         List<String> topicFilters = msg.payload().topics();
         String clientId = (String) channel.attr(AttributeKey.valueOf("clientId")).get();

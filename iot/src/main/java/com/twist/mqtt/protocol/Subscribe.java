@@ -39,6 +39,13 @@ public class Subscribe {
 
     private RetainMessageStoreService retainMessageStoreService;
 
+
+    public Subscribe(SubscribeStoreService subscribeStoreService, MessageIdService messageIdService, RetainMessageStoreService retainMessageStoreService) {
+        this.subscribeStoreService = subscribeStoreService;
+        this.messageIdService = messageIdService;
+        this.retainMessageStoreService = retainMessageStoreService;
+    }
+
     public void processSubscribe(Channel channel, MqttSubscribeMessage msg) {
         List<MqttTopicSubscription> topicSubscriptions = msg.payload().topicSubscriptions();
         if (this.validTopicFilter(topicSubscriptions)) {
