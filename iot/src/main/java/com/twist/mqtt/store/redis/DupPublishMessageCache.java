@@ -1,6 +1,6 @@
 package com.twist.mqtt.store.redis;
 
-import com.twist.mqtt.bean.DupPublishMessageStore;
+import com.twist.mqtt.pojo.DupPublishMessageStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

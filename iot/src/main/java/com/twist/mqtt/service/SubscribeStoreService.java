@@ -1,6 +1,6 @@
 package com.twist.mqtt.service;
 
-import com.twist.mqtt.bean.SubscribeStore;
+import com.twist.mqtt.pojo.SubscribeStore;
 
 import java.util.List;
 

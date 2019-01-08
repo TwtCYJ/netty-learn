@@ -1,12 +1,5 @@
 package com.twist.mqtt.protocol;
 
-import com.twist.mqtt.PubAck;
-import com.twist.mqtt.PubComp;
-import com.twist.mqtt.PubRec;
-import com.twist.mqtt.PubRel;
-import com.twist.mqtt.Publish;
-import com.twist.mqtt.Subscribe;
-import com.twist.mqtt.UnSubscribe;
 import org.springframework.stereotype.Component;
 
 
@@ -18,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProtocolProcess {
 
-    private com.twist.mqtt.protocol.Connect connect;
+    private Connect connect;
 
     private Subscribe subscribe;
 
@@ -26,9 +19,9 @@ public class ProtocolProcess {
 
     private Publish publish;
 
-    private com.twist.mqtt.protocol.DisConnect disConnect;
+    private DisConnect disConnect;
 
-    private com.twist.mqtt.protocol.PingReq pingReq;
+    private PingReq pingReq;
 
     private PubRel pubRel;
 

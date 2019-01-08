@@ -1,7 +1,7 @@
 package com.twist.mqtt.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.twist.mqtt.bean.SubscribeStore;
+import com.twist.mqtt.pojo.SubscribeStore;
 import com.twist.mqtt.service.SubscribeStoreService;
 import com.twist.mqtt.store.redis.SubscribeNotWildcardCache;
 import com.twist.mqtt.store.redis.SubscribeWildcardCache;

@@ -1,6 +1,6 @@
 package com.twist.mqtt.service;
 
-import com.twist.mqtt.bean.SessionStore;
+import com.twist.mqtt.pojo.SessionStore;
 
 /**
  * @description: session 回话存储

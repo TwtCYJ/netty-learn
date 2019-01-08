@@ -1,9 +1,9 @@
 package com.twist.mqtt.protocol;
 
 import cn.hutool.core.util.StrUtil;
-import com.twist.mqtt.bean.DupPubRelMessageStore;
-import com.twist.mqtt.bean.DupPublishMessageStore;
-import com.twist.mqtt.bean.SessionStore;
+import com.twist.mqtt.pojo.DupPubRelMessageStore;
+import com.twist.mqtt.pojo.DupPublishMessageStore;
+import com.twist.mqtt.pojo.SessionStore;
 import com.twist.mqtt.service.AuthService;
 import com.twist.mqtt.service.DupPubRelMessageStoreService;
 import com.twist.mqtt.service.DupPublishMessageStoreService;

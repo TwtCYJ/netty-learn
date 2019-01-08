@@ -1,6 +1,6 @@
 package com.twist.mqtt.service.impl;
 
-import com.twist.mqtt.bean.DupPubRelMessageStore;
+import com.twist.mqtt.pojo.DupPubRelMessageStore;
 import com.twist.mqtt.service.DupPubRelMessageStoreService;
 import com.twist.mqtt.store.redis.DupPubRelMessageCache;
 import org.springframework.beans.factory.annotation.Autowired;

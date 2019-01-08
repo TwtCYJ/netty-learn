@@ -1,6 +1,6 @@
 package com.twist.mqtt.service.impl;
 
-import com.twist.mqtt.bean.SessionStore;
+import com.twist.mqtt.pojo.SessionStore;
 import com.twist.mqtt.service.SessionStoreService;
 import org.springframework.stereotype.Service;
 

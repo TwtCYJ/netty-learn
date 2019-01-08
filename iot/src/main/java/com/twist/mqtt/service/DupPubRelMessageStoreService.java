@@ -1,6 +1,6 @@
 package com.twist.mqtt.service;
 
-import com.twist.mqtt.bean.DupPubRelMessageStore;
+import com.twist.mqtt.pojo.DupPubRelMessageStore;
 
 import java.util.List;
 

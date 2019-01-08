@@ -1,6 +1,6 @@
 package com.twist.mqtt.protocol;
 
-import com.twist.mqtt.bean.SessionStore;
+import com.twist.mqtt.pojo.SessionStore;
 import com.twist.mqtt.service.DupPubRelMessageStoreService;
 import com.twist.mqtt.service.DupPublishMessageStoreService;
 import com.twist.mqtt.service.SessionStoreService;

@@ -1,4 +1,4 @@
-package com.twist.mqtt.bean;
+package com.twist.mqtt.pojo;
 
 import io.netty.channel.Channel;
 import io.netty.handler.codec.mqtt.MqttPublishMessage;

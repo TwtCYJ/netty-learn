@@ -1,4 +1,4 @@
-package com.twist.mqtt.bean;
+package com.twist.mqtt.pojo;
 
 import java.io.Serializable;
 
