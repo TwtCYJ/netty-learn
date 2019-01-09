@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
 public class KafkaServiceImpl implements KafkaService {
 
     @Autowired
-    private KafkaTemplate kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     private static Gson gson = new GsonBuilder().create();
 
     @Override
     public void send(InnerMessage innerMessage) {
-        kafkaTemplate.send(innerMessage.getTopic(),gson.toJson(innerMessage));
+        kafkaTemplate.send(innerMessage.getTopic(), gson.toJson(innerMessage));
     }
 }
