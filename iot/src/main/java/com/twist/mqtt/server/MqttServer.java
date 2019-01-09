@@ -6,11 +6,16 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.ResourceLeakDetector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +42,10 @@ public class MqttServer {
     private Integer port;
     @Value("${mqtt.adaptor}")
     private String adaptorName;
+    @Value("${mqtt.timeout}")
+    private int timeout;
+    @Value("${mqtt.netty.use_epoll}")
+    private boolean useEpoll;
 
     @Value("${mqtt.netty.leak_detector_level}")
     private String leakDetectorLevel;
@@ -61,25 +70,27 @@ public class MqttServer {
         log.info("Starting MQTT transport...");
 
         log.info("Starting MQTT transport server");
-        bossGroup = new NioEventLoopGroup(bossGroupThreadCount);
-        workerGroup = new NioEventLoopGroup(workerGroupThreadCount);
+        bossGroup = useEpoll? new EpollEventLoopGroup(bossGroupThreadCount) : new NioEventLoopGroup(bossGroupThreadCount);
+        workerGroup = useEpoll? new EpollEventLoopGroup(workerGroupThreadCount) : new NioEventLoopGroup(workerGroupThreadCount);
         ServerBootstrap b = new ServerBootstrap();
         b.group(bossGroup, workerGroup)
-                .channel(NioServerSocketChannel.class)
+                .channel(useEpoll ? EpollServerSocketChannel.class : NioServerSocketChannel.class)
+                .handler(new LoggingHandler(LogLevel.INFO))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast("decoder", new MqttDecoder(maxPayloadSize));
                         pipeline.addLast("encoder", MqttEncoder.INSTANCE);
+                        // Netty提供的心跳检测
+                        pipeline.addFirst("idle", new IdleStateHandler(0, 0, timeout));
 //                        pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 2, 12, TimeUnit.SECONDS));
-                        MqttTransportHandler handler = new com.twist.mqtt.server.MqttTransportHandler(protocolProcess);
+                        MqttTransportHandler handler = new MqttTransportHandler(protocolProcess);
                         pipeline.addLast(handler);
                     }
                 });
 
         serverChannel = b.bind(host, port).sync().channel();
-
 
         log.info("Mqtt transport started!");
     }

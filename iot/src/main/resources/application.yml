@@ -42,8 +42,9 @@ mqtt:
   host: 0.0.0.0
   port: 1883
   adaptor: JsonMqttAdaptor
-  timeout: 10000
+  timeout: 60
   netty:
+    use_epoll: true
     leak_detector_level: DISABLED
     boss_group_thread_count: 1
     worker_group_thread_count: 8

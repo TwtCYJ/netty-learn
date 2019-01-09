@@ -40,7 +40,9 @@ public class Subscribe {
     private RetainMessageStoreService retainMessageStoreService;
 
 
-    public Subscribe(SubscribeStoreService subscribeStoreService, MessageIdService messageIdService, RetainMessageStoreService retainMessageStoreService) {
+    public Subscribe(SubscribeStoreService subscribeStoreService,
+                     MessageIdService messageIdService,
+                     RetainMessageStoreService retainMessageStoreService) {
         this.subscribeStoreService = subscribeStoreService;
         this.messageIdService = messageIdService;
         this.retainMessageStoreService = retainMessageStoreService;
@@ -62,8 +64,7 @@ public class Subscribe {
             MqttSubAckMessage subAckMessage = (MqttSubAckMessage) MqttMessageFactory.newMessage(
                     new MqttFixedHeader(MqttMessageType.SUBACK, false, MqttQoS.AT_MOST_ONCE, false, 0),
                     MqttMessageIdVariableHeader.from(msg.variableHeader().messageId()),
-                    new MqttSubAckPayload(mqttQoSList)
-            );
+                    new MqttSubAckPayload(mqttQoSList));
             channel.writeAndFlush(subAckMessage);
 
             //发布保留信息

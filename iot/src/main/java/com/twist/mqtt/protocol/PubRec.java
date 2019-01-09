@@ -25,7 +25,8 @@ public class PubRec {
 
     private DupPubRelMessageStoreService dupPubRelMessageStoreService;
 
-    public PubRec(DupPublishMessageStoreService dupPublishMessageStoreService, DupPubRelMessageStoreService dupPubRelMessageStoreService) {
+    public PubRec(DupPublishMessageStoreService dupPublishMessageStoreService,
+                  DupPubRelMessageStoreService dupPubRelMessageStoreService) {
         this.dupPublishMessageStoreService = dupPublishMessageStoreService;
         this.dupPubRelMessageStoreService = dupPubRelMessageStoreService;
     }
@@ -34,8 +35,7 @@ public class PubRec {
         MqttMessage pubRelMessage = MqttMessageFactory.newMessage(
                 new MqttFixedHeader(MqttMessageType.PUBREL, false, MqttQoS.AT_MOST_ONCE, false, 0),
                 MqttMessageIdVariableHeader.from(variableHeader.messageId()),
-                null
-        );
+                null);
         log.info("PUBREC - clientId: {}, messageId: {}", (String) channel.attr(AttributeKey.valueOf("clientId")).get(), variableHeader.messageId());
         dupPublishMessageStoreService.remove((String) channel.attr(AttributeKey.valueOf("clientId")).get(), variableHeader.messageId());
         DupPubRelMessageStore dupPubRelMessageStore = new DupPubRelMessageStore()

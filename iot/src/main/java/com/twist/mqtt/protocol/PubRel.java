@@ -22,8 +22,7 @@ public class PubRel {
         MqttMessage pubCompMessage = (MqttMessage) MqttMessageFactory.newMessage(
                 new MqttFixedHeader(MqttMessageType.PUBCOMP, false, MqttQoS.AT_MOST_ONCE, false, 0),
                 MqttMessageIdVariableHeader.from(variableHeader.messageId()),
-                null
-        );
+                null);
         log.info("PUBREL - clientId: {}, messageId: {}", (String) channel.attr(AttributeKey.valueOf("clientId")).get(), variableHeader.messageId());
         channel.writeAndFlush(pubCompMessage);
     }

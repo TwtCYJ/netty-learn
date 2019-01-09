@@ -46,7 +46,12 @@ public class Publish {
 
     private RetainMessageStoreService retainMessageStoreService;
 
-    public Publish(KafkaService kafkaService, SubscribeStoreService subscribeStoreService, SessionStoreService sessionStoreService, MessageIdService messageIdService, DupPublishMessageStoreService dupPublishMessageStoreService, RetainMessageStoreService retainMessageStoreService) {
+    public Publish(KafkaService kafkaService,
+                   SubscribeStoreService subscribeStoreService,
+                   SessionStoreService sessionStoreService,
+                   MessageIdService messageIdService,
+                   DupPublishMessageStoreService dupPublishMessageStoreService,
+                   RetainMessageStoreService retainMessageStoreService) {
         this.kafkaService = kafkaService;
         this.subscribeStoreService = subscribeStoreService;
         this.sessionStoreService = sessionStoreService;
