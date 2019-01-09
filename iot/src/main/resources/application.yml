@@ -1,5 +1,5 @@
 server:
-  port: 8283
+  port: 8080
 spring:
   redis:
     host: localhost
@@ -12,7 +12,7 @@ spring:
         max-idle: 8
         max-wait: -1ms
         max-active: 8
-    password: shiji159
+    password:
   kafka:
     #代理地址 可以多个
     bootstrap-servers: 127.0.0.1:9092
@@ -40,7 +40,7 @@ spring:
 mqtt:
   enabled: true
   host: 0.0.0.0
-  port: 8282
+  port: 1883
   adaptor: JsonMqttAdaptor
   timeout: 10000
   netty:
