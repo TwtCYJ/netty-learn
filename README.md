@@ -9,3 +9,4 @@ https://mcxiaoke.gitbooks.io/mqtt-cn/content/mqtt/01-Introduction.html
 
 ##### changeLog
 - 新增BCD 自定协议的springboot-netty 通讯模块demo
+- 增加netty-mqtt功能实现
