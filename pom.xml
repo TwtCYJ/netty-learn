@@ -9,6 +9,7 @@
         <module>protobuf</module>
         <module>netty-yujia</module>
         <module>iot</module>
+        <module>example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
