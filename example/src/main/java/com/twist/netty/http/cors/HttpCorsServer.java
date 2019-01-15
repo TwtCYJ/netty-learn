@@ -1,8 +1,6 @@
-package com.twist.netty.file;
+package com.twist.netty.http.cors;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -13,18 +11,16 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
- * @description: ${description}
+ * @description: http 的 跨资源访问，像其他用法的orign('*')
  * @author: chenyingjie
- * @create: 2019-01-11 14:00
+ * @create: 2019-01-15 15:09
  **/
-public class FileServer {
+public final class HttpCorsServer {
 
     static final boolean SSL = System.getProperty("ssl") != null;
-    // 用telnet client 来测试上传 .
-    static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8992" : "8023"));
+    static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
 
     public static void main(String[] args) throws Exception {
-        // Configure SSL.
         final SslContext sslCtx;
         if (SSL) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();
@@ -33,7 +29,6 @@ public class FileServer {
             sslCtx = null;
         }
 
-        // Configure the server.
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -42,12 +37,9 @@ public class FileServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new FileServerInitializer(sslCtx))
-                    .option(ChannelOption.SO_BACKLOG,100);
+                    .childHandler(new HttpCorsServerInitializer(sslCtx));
 
-            ChannelFuture f = b.bind(PORT).sync();
-
-            f.channel().closeFuture().sync();
+            b.bind(PORT).sync().channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
